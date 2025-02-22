@@ -41,7 +41,7 @@ fun SplashScreen(navController: NavController) {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        // Background Image
+
         Image(
             painter = painterResource(id = R.drawable.bg_screen),
             contentDescription = "Background",
@@ -50,9 +50,9 @@ fun SplashScreen(navController: NavController) {
         )
 
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            // Drawable Icon
+
             Image(
-                painter = painterResource(id = R.drawable.news_logo), // Replace with your drawable icon
+                painter = painterResource(id = R.drawable.news_logo),
                 contentDescription = "App Logo",
                 modifier = Modifier
                     .size(120.dp)
@@ -63,8 +63,7 @@ fun SplashScreen(navController: NavController) {
                 text = "Historical Newspapers",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.White // Set text color for visibility
-            )
+                color = Color.White             )
         }
     }
 }
