@@ -1,65 +1,75 @@
 package com.example.studentcomposeapp.ui.Screen
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import android.view.View
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import kotlinx.coroutines.delay
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.newpaperapp.R
+import com.example.newpaperapp.ui.theme.themecolor
+import kotlinx.coroutines.delay
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
+
 
 @Composable
-fun SplashScreen(navController: NavHostController) {
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(Color.White),
-        contentAlignment = Alignment.Center
-       ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally // Centers children horizontally
-        ) {
-            Text(
-                text = "NEWSPAPER",
-                fontSize = 25.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
-            )
+fun SplashScreen(navController: NavController) {
 
-            Spacer(modifier = Modifier.height(10.dp))
+    val systemUiController = rememberSystemUiController()
 
-            Text(
-                text = "Hub of Information",
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
-            )
+    SideEffect {
+        systemUiController.setStatusBarColor(color = themecolor)
+    }
+    LaunchedEffect(Unit) {
+        delay(2000)
+        navController.navigate("list") {
+            popUpTo("splash") { inclusive = true }
         }
+    }
 
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        // Background Image
+        Image(
+            painter = painterResource(id = R.drawable.bg_screen),
+            contentDescription = "Background",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
 
-        // Navigate to Home screen after 2 seconds
-        LaunchedEffect(Unit) {
-            delay(2000) // 2-second timer
-            navController.navigate("newslist") {
-                popUpTo("splash") { inclusive = true }
-            }
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            // Drawable Icon
+            Image(
+                painter = painterResource(id = R.drawable.news_logo), // Replace with your drawable icon
+                contentDescription = "App Logo",
+                modifier = Modifier
+                    .size(120.dp)
+                    .padding(16.dp)
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = "Historical Newspapers",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White // Set text color for visibility
+            )
         }
     }
 }
+
+
 
 @Preview(showBackground = true)
 @Composable

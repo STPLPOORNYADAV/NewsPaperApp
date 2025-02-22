@@ -2,9 +2,11 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.ksp)
-    kotlin("kapt")
+    //alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt.android)
 }
+
 
 android {
     namespace = "com.example.newpaperapp"
@@ -39,6 +41,10 @@ android {
     buildFeatures {
         compose = true
     }
+
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -60,8 +66,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     //Architectural Components
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-
+    //implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
@@ -79,7 +84,27 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.3")
 
     //Dagger
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-compiler:2.44")
-    implementation("androidx.hilt:hilt-common:1.1.0")
+   // implementation("com.google.dagger:hilt-android:2.50")
+   // kapt("com.google.dagger:hilt-compiler:2.50")
+  ////  implementation("androidx.hilt:hilt-common:1.2.0")
+
+
+    // Hilt ViewModel extension
+  //  implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+  //  implementation("com.google.dagger:hilt-android-compiler:2.50")
+
+    // Kotlin Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+
+    // Lifecycle (ViewModel, LiveData)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+
+    implementation("com.google.dagger:hilt-android:2.50")
+    kapt("com.google.dagger:hilt-android-compiler:2.50")
+
+    // Required for Hilt ViewModel
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
 }
