@@ -33,7 +33,7 @@ fun NewsNavigation(navController: NavHostController, viewModel: NewspaperListVie
         composable("list") {
             NewspaperListScreen(navController, viewModel) { newspaper ->
                 val encodedUrl = Uri.encode(newspaper.url)
-                navController.navigate("detail/$encodedUrl")  // ✅ Only passing the URL
+                navController.navigate("detail/$encodedUrl")
             }
         }
         composable(
@@ -43,7 +43,7 @@ fun NewsNavigation(navController: NavHostController, viewModel: NewspaperListVie
             )
         ) { backStackEntry ->
             val url = backStackEntry.arguments?.getString("url") ?: ""
-            NewspaperDetailScreen(url) // ✅ Correct parameter passed
+            NewspaperDetailScreen(url)
         }
     }
 }
